@@ -103,10 +103,7 @@ export default function UsersList({ data }) {
       address: address
     }
 
-    let timer = setTimeout(() => {
-      // hideAlertShow();
-      clearTimeout(timer);
-    }, 5 * 1000);
+
 
     let result = await userApiService.saveUser(rowData);
     if (result) {
@@ -114,9 +111,10 @@ export default function UsersList({ data }) {
       notify();
       loadTable();
       setOpenForm(0);
+      console.log('Sucess')
 
     } else {
-      //showMsg.error(createErrorMessage(result))
+      console.log('error')
     }
     setTimeout(() => {
     }, 1000);
@@ -130,8 +128,8 @@ export default function UsersList({ data }) {
       telephone: telephone,
       address: address
     }
-    
-    let result = await userApiService.  deleteNote(rowData);
+
+    let result = await userApiService.deleteNote(rowData);
     if (result) {
       loadTable();
       setOpenForm(0);
@@ -139,8 +137,8 @@ export default function UsersList({ data }) {
     } else {
       console.log('error')
     }
-  
-}
+
+  }
 
   const updateForm = async () => {
 
@@ -162,7 +160,7 @@ export default function UsersList({ data }) {
     } else {
       console.log('error')
     }
- 
+
   }
 
 
@@ -271,34 +269,44 @@ export default function UsersList({ data }) {
   }
   const viewUsersForm = () => {
     return (
-      <div classNameName='p-5'>
+      <div className='p-5'>
         <h3>Users</h3>
-        <div classNameName="container  p-5">
+        <div className="container  p-5">
           <div className="input-group input-group-sm mb-3">
             <span className="input-group-text" id="inputGroup-sizing-sm">Name:</span>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled={true}
-              value={name} />
+            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              disabled={true}
+              required />
           </div>
           <div className="input-group input-group-sm mb-3">
             <span className="input-group-text" id="inputGroup-sizing-sm">Email:</span>
-            <input type="email" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled={true}
-              value={email} />
+            <input type="email" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              disabled={true}
+              required />
           </div>
           <div className="input-group input-group-sm mb-3">
             <span className="input-group-text" id="inputGroup-sizing-sm">Telephone:</span>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled={true}
-              value={telephone} />
+            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+              onChange={(e) => setTelephone(e.target.value)}
+              value={telephone}
+              disabled={true}
+              required />
           </div>
           <div className="input-group input-group-sm mb-3">
             <span className="input-group-text" id="inputGroup-sizing-sm">Address:</span>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled={true}
-              value={address} />
+            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+              onChange={(e) => setAdress(e.target.value)}
+              value={address}
+              required disabled={true} />
           </div>
           <button onClick={handleUserList} className="btn btn-warning">Back</button>
-          <div classNameName='row'>
-          </div>
         </div>
       </div>
+
     )
   }
   const userListForm = () => {
