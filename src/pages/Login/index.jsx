@@ -3,9 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHardHat } from '@fortawesome/free-solid-svg-icons';
 import UsersList from '../User';
 import NOTELIST from '../Note';
-import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import '../../account-overview.css';
 
 export default function Login({ data }) {
@@ -13,7 +11,7 @@ export default function Login({ data }) {
   const [openForm, setOpenForm] = useState(0);
   const [email, setEmail] = useState('')
   const  [password, setPassword] = useState ('')
-  const myStorage = localStorage;
+
 
   const handleNoteList = () => {
     setOpenForm(2)

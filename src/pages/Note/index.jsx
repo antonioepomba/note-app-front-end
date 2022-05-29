@@ -4,8 +4,6 @@ import '../../account-overview.css';
 import api from '../../services/api'
 import DATATABLE from '../../components/DataTable';
 import Actions from '../../components/Actions';
-//mport validator from '../../services/validator.service';
-//import createErrorMessage from '../../services/createErrorMessage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const userApiService = new api();
@@ -42,8 +40,6 @@ const columns = [
   }
 
 ];
-
-//const validation = new validator();
 
 export default function NoteList() {
 

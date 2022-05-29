@@ -192,7 +192,7 @@ export default function UsersList({ data }) {
   const usersForm = () => {
     return (
       <div className='p-5'>
-        <ToastContainer></ToastContainer>
+        <ToastContainer />
         <h3>Users</h3>
         <div className="container  p-5">
           <div className="input-group input-group-sm mb-3">

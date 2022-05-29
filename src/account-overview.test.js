@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import AccountOverview from './account-overview';
+//import AccountOverview from './account-overview';
+import Login  from '../src/pages/Login'
 
 test('renders learn react link', () => {
-  render(<AccountOverview />);
-  const element = screen.getByText(/Build your components here/i);
+  render(<Login />);
+  const element = screen.getByText(<login />);
   expect(element).toBeInTheDocument();
 });
