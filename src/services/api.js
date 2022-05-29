@@ -68,13 +68,11 @@ const post = async ({ endpoint, data }) => {
   return result?.data;
 }
 
-const handleDelete = async ({ endpoint }) => {
+const handleDelete = async ({ endpoint,data }) => {
   let result = await httpClient
     .delete(
-      endpoint,
-      {
-        crossdomain: true
-      },
+      endpoint,data,
+     
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -114,13 +112,16 @@ export default class api {
     return post({ endpoint: '/user', data: data });
   };
   getNoteById = (data) => {
-    return get({ endpoint: `note/${data.codigo}`, data: data });
+    return get({ endpoint: `note/${data.id}`, data: data });
   }
   getUserById = (data) => {
-    return get({ endpoint: `user/${data.codigo}`, data: data });
+    return get({ endpoint: `user/${data.id}`, data: data });
   }
-  deleteNote = (id) => {
-    return handleDelete({ endpoint: `note/${id}` });
+  deleteNote = (data) => {
+    return handleDelete({ endpoint: '/note', data: data });
+  };
+  deleteUser = (data) => {
+    return handleDelete({ endpoint: '/user', data: data });
   };
 }
 export const userApiService = {

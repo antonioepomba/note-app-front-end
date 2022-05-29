@@ -86,6 +86,11 @@ export default function UsersList({ data }) {
     setData(user)
     setOpenForm(2)
   }
+  const handleDelete = (user) => {
+    setData(user?.id)
+    deleteData(user?.id)
+    setOpenForm(0)
+  }
 
   const saveForm = async () => {
 
@@ -116,7 +121,26 @@ export default function UsersList({ data }) {
     setTimeout(() => {
     }, 1000);
   }
-
+  const deleteData = async () => {
+    const rowData = {
+      id: id,
+      name: name,
+      email: email,
+      password: password,
+      telephone: telephone,
+      address: address
+    }
+    
+    let result = await userApiService.  deleteNote(rowData);
+    if (result) {
+      loadTable();
+      setOpenForm(0);
+      console.log('success')
+    } else {
+      console.log('error')
+    }
+  
+}
 
   const updateForm = async () => {
 
@@ -128,24 +152,17 @@ export default function UsersList({ data }) {
       telephone: telephone,
       address: address
     }
-
-    let timer = setTimeout(() => {
-      // hideAlertShow();
-      clearTimeout(timer);
-    }, 5 * 1000);
-
     let result = await userApiService.getUserById(rowData);
     if (result) {
       setData()
       notify();
       loadTable();
       setOpenForm(0);
-
+      console.log('sucess')
     } else {
-      //showMsg.error(createErrorMessage(result))
+      console.log('error')
     }
-    setTimeout(() => {
-    }, 1000);
+ 
   }
 
 
@@ -160,7 +177,7 @@ export default function UsersList({ data }) {
           email: l?.email,
           telephone: l?.telephone,
           address: l?.address,
-          action: (<Actions value={l} handleView={handleView} handleEdit={handleEdit} handleDelete={handleView} />)
+          action: (<Actions value={l} handleView={handleView} handleEdit={handleEdit} handleDelete={handleDelete} />)
         });
       });
       setList({ columns: columns, rows: rows })

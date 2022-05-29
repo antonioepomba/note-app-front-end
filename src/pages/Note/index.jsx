@@ -45,19 +45,19 @@ const columns = [
 
 //const validation = new validator();
 
-export default function NoteList(props) {
+export default function NoteList() {
+
   const [openForm, setOpenForm] = useState(0);
   const [id, setId] = useState('')
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
   const [list, setList] = useState([]);
-  const { hideAlertShow, showMsg } = props;
+ 
 
 
 
   useEffect(async () => {
-    //validation.setShowMsg(showMsg);
     loadTable();
   }, []);
   const notify = () => toast("Note Saved!");
@@ -104,12 +104,6 @@ export default function NoteList(props) {
       author: author,
       text: text
     }
-
-    let timer = setTimeout(() => {
-      // hideAlertShow();
-      clearTimeout(timer);
-    }, 5 * 1000);
-
     let result = await userApiService.saveNote(rowData);
     if (result) {
       setData()
@@ -118,15 +112,18 @@ export default function NoteList(props) {
       setOpenForm(0);
 
     } else {
-      //showMsg.error(createErrorMessage(result))
+      console.log('error',result)
     }
-    setTimeout(() => {
-    }, 1000);
   }
-  const deleteData = async (answer) => {
+  const deleteData = async () => {
 
-    if (answer) {
-      let result = await userApiService.deleteNote(id);
+    const rowData = {
+      id: id,
+      title: title,
+      author: author,
+      text: text
+    }
+      let result = await userApiService. deleteUser(rowData)
       if (result) {
         loadTable();
         setOpenForm(0);
@@ -134,10 +131,9 @@ export default function NoteList(props) {
       } else {
         console.log('error')
       }
-    }
+    
   }
   const updateForm = async () => {
-    //setOpenSpinner(true);
     const rowData = {
       id: id,
       title: title,
@@ -145,24 +141,18 @@ export default function NoteList(props) {
       text: text
     }
 
-    let timer = setTimeout(() => {
-      //hideAlertShow();
-      clearTimeout(timer);
-    }, 5 * 1000);
-
     let result = await userApiService.getNoteById(rowData);
 
     if (result) {
       setData()
       loadTable();
       setOpenForm(0);
+      console.log('sucess',result)
 
     } else {
-      //showMsg.error(result?.exception?.msg)
+      console.log('error',result)
     }
-    setTimeout(() => {
-      // setOpenSpinner(false);
-    }, 1000);
+  
   }
 
 
