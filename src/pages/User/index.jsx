@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../account-overview.css';
 import Actions from '../../components/Actions';
+import Login from '../Login'
 import api from '../../services/api';
 import DATATABLE from '../../components/DataTable';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast}  from 'react-toastify';
+import  {ToastContainer }from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+
 const userApiService = new api();
 const columns = [
   {
@@ -70,7 +75,7 @@ export default function UsersList({ data }) {
   }
 
 
-  const notify = () => toast("user Saved!");
+
   const handleUserList = () => {
     setOpenForm(0)
   }
@@ -91,7 +96,10 @@ export default function UsersList({ data }) {
     deleteData(user?.id)
     setOpenForm(0)
   }
-
+  const handleLogin = () =>{
+    setOpenForm(4)
+  }
+  const notify = () => toast("user Saved!");
   const saveForm = async () => {
 
     const rowData = {
@@ -184,6 +192,7 @@ export default function UsersList({ data }) {
   const usersForm = () => {
     return (
       <div className='p-5'>
+        <ToastContainer></ToastContainer>
         <h3>Users</h3>
         <div className="container  p-5">
           <div className="input-group input-group-sm mb-3">
@@ -313,12 +322,18 @@ export default function UsersList({ data }) {
     return (
       <div className='container-fluid h-100 w-100 p-3 m-0'>
         <h4>Users</h4>
-        <div className="row justify-content-md-left"><div className="col col-lg-2"> <button onClick={handleUsersForm} className="btn btn-success btn-sm float-left">Add User</button>
+        <div className="row justify-content-md-left"><div className="col col-lg-2"> <button onClick={handleLogin} className="btn btn-primary btn-sm float-left">Login</button>
         </div>
+        <div className="container-fluid h-100 w-100 p-3 m-0"><button onClick={handleUsersForm} className="btn btn-success btn-sm float-left">Add User</button></div>
         </div>
         <DATATABLE
           data={list} />
       </div>
+    )
+  }
+  const loginForm = () =>{
+    return(
+      <Login />
     )
   }
   const start = () => {
@@ -331,6 +346,8 @@ export default function UsersList({ data }) {
         return viewUsersForm();
       case 3:
         return editForm();
+        case 4:
+        return loginForm()
       default:
         break;
     }
